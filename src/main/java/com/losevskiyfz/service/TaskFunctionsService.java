@@ -3,49 +3,71 @@ package com.losevskiyfz.service;
 import com.losevskiyfz.domain.Order;
 import com.losevskiyfz.domain.User;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class TaskFunctionsService {
 
     List<Long> usersToIds(List<User> users){
-        return null;
+        return users.stream()
+                .map(User::getId)
+                .collect(Collectors.toList());
     }
 
     List<User> filterUsersWithoutOrders(List<User> users){
-        return null;
+        return users.stream()
+                .filter(user -> user.getOrders().isEmpty())
+                .collect(Collectors.toList());
     }
 
     List<Order> getAndSortAllOrdersOfUsers(List<User> users){
-        return null;
+        return users.stream()
+                .map(User::getOrders)
+                .flatMap(Collection::stream)
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     boolean checkIfOrdersAreExpensive(User user, int minPrice){
-        return false;
+        return user.getOrders().stream()
+                .allMatch(order -> order.getPrice() > minPrice);
     }
 
     boolean hasAnyExpensiveOrder(User user, int minPrice){
-        return false;
+        return user.getOrders().stream()
+                .anyMatch(order -> order.getPrice() > minPrice);
     }
 
     Map<Integer, List<Order>> groupOrdersByPrice(List<Order> orders){
-        return null;
+        return orders.stream()
+                .collect(Collectors.groupingBy(Order::getPrice));
     }
 
     void filterSimilarAddressesAndPrint(List<User> users){
-
+        users.stream()
+                .map(User::getDeliveryAddresses)
+                .flatMap(Collection::stream)
+                .distinct()
+                .forEach(System.out::println);
     }
 
     int getTheMostExpensiveOrderPrice(List<Order> orders){
-        return 0;
+        return orders.stream()
+                .map(Order::getPrice)
+                .max(Integer::compareTo)
+                .orElse(0);
     }
 
     Order getTheMostExpensiveOrder(List<Order> orders){
-        return null;
+        return orders.stream()
+                .max(Comparator.comparingInt(Order::getPrice))
+                .orElseThrow(NoSuchElementException::new);
     }
 
     int getAveragePriceOfOrders(List<Order> orders){
-        return 0;
+        return orders.stream()
+                .collect(Collectors.averagingInt(Order::getPrice))
+                .intValue();
     }
 
 }
