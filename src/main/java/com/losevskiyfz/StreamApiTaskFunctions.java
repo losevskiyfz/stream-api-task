@@ -1,4 +1,4 @@
-package com.losevskiyfz.service;
+package com.losevskiyfz;
 
 import com.losevskiyfz.domain.Order;
 import com.losevskiyfz.domain.User;
@@ -6,7 +6,7 @@ import com.losevskiyfz.domain.User;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class TaskFunctionsService {
+public class StreamApiTaskFunctions {
 
     List<Long> usersToIds(List<User> users){
         return users.stream()
