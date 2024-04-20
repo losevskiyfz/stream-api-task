@@ -55,13 +55,13 @@ public class StreamApiTaskFunctions {
         return orders.stream()
                 .map(Order::getPrice)
                 .max(Integer::compareTo)
-                .orElse(0);
+                .orElseThrow();
     }
 
     Order getTheMostExpensiveOrder(List<Order> orders){
         return orders.stream()
                 .max(Comparator.comparingInt(Order::getPrice))
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     int getAveragePriceOfOrders(List<Order> orders){
