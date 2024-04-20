@@ -24,7 +24,7 @@ public class TaskFunctionsService {
         return users.stream()
                 .map(User::getOrders)
                 .flatMap(Collection::stream)
-                .sorted()
+                .sorted(Comparator.comparingInt(Order::getPrice))
                 .collect(Collectors.toList());
     }
 
