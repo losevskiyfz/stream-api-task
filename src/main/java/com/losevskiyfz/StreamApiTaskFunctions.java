@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class StreamApiTaskFunctions {
 
     private static final String emptyListOfOrdersExceptionMessage =
-            "There is an empty list of orders. Can't get the max value.";
+            "There is an empty list of orders. Can't get a max value.";
 
     List<Long> usersToIds(List<User> users){
         return users.stream()
