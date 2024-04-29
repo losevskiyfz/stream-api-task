@@ -55,13 +55,13 @@ public class StreamApiTaskFunctions {
         return orders.stream()
                 .map(Order::getPrice)
                 .max(Integer::compareTo)
-                .orElseThrow();
+                .orElseThrow(() -> new NoSuchElementException("There is an empty list of orders"));
     }
 
     Order getTheMostExpensiveOrder(List<Order> orders){
         return orders.stream()
                 .max(Comparator.comparingInt(Order::getPrice))
-                .orElseThrow();
+                .orElseThrow(() -> new NoSuchElementException("There is an empty list of orders"));
     }
 
     int getAveragePriceOfOrders(List<Order> orders){
