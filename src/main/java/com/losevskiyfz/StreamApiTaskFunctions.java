@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class StreamApiTaskFunctions {
 
-    private static final String emptyListOfOrdersExceptionMessage =
+    private static final String EMPTY_LIST_OF_ORDERS_EXCEPTION_MESSAGE =
             "There is an empty list of orders. Can't get a max value.";
 
     List<Long> usersToIds(List<User> users){
@@ -58,13 +58,13 @@ public class StreamApiTaskFunctions {
         return orders.stream()
                 .map(Order::getPrice)
                 .max(Integer::compareTo)
-                .orElseThrow(() -> new NoSuchElementException(emptyListOfOrdersExceptionMessage));
+                .orElseThrow(() -> new NoSuchElementException(EMPTY_LIST_OF_ORDERS_EXCEPTION_MESSAGE));
     }
 
     Order getTheMostExpensiveOrder(List<Order> orders){
         return orders.stream()
                 .max(Comparator.comparingInt(Order::getPrice))
-                .orElseThrow(() -> new NoSuchElementException(emptyListOfOrdersExceptionMessage));
+                .orElseThrow(() -> new NoSuchElementException(EMPTY_LIST_OF_ORDERS_EXCEPTION_MESSAGE));
     }
 
     int getAveragePriceOfOrders(List<Order> orders){
